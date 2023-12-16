@@ -1,0 +1,18 @@
+.f-24 {
+    font-size: 24px;
+}
+
+.btn {
+    height: 42px;
+    border: none;
+    border-radius: 3px;
+
+    /* background-color: ; */
+
+    /* background-color: #fdfdff; */
+}
+
+.active {
+    visibility: visible !important;
+    opacity: 1 !important;
+}

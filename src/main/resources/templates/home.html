@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../static/css/general.css">
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/sidebar.css">
+    <link rel="stylesheet" href="../static/css/util.css">
+    <link rel="stylesheet" href="../static/css/body.css">
+    <link rel="stylesheet" href="../static/css/loginForm.css">
+
+    <title>Document</title>
+</head>
+
+<body style="position: relative;">
+
+    <header class="header">
+        <div class="header-container">
+            <p class="header__title f-24" onclick="routing('')">
+                core spring security
+                <!-- <p href="/">core spring security</p> -->
+            </p>
+            <a href="/home" class="header__home f-24">home</a>
+            <a href="/logout" class="header__log f-24">logout</a>
+            <p id="login" class="f-24">login</p>
+
+        </div>
+    </header>
+
+    <div class="login-bg">
+        <div class="login-container">
+            <form action="/login" method="post" class="login" onclick="">
+
+                <div class="login__title">
+                    로그인
+                </div>
+                <div class="login__input">
+                    <input type="text" id="username" name="username" placeholder="아이디">
+                </div>
+                <div class="login__input">
+                    <input type="password" id="password" name="password" placeholder="비밀번호">
+                </div>
+                <div class="login__submit">
+                    <button type="submit" class="login__btn">로그인</button>
+                    <button type="submit" class="login__btn">회원 가입</button>
+                </div> 
+            </form>
+        </div>
+    </div>
+        
+
+    <div class="body">
+        
+        <div class="body-container">
+            <div class="sidebar-container">
+                <div class="sidebar-item" onclick="routing('dash')">
+                    <p>대시보드</p>
+                </div>
+                <div class="sidebar-item" onclick="routing('user')">
+                    <p>사용자페이지</p>
+                </div>
+                <div class="sidebar-item" onclick="routing('admin')">
+                    <p>관리자페이지</p>
+                </div>
+            </div>
+            <main class="contents-container">
+                
+            </main>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../static/js/login.js"></script>
+    <script>
+        const content = document.querySelector('.contents-container');
+
+        let routing = url => {
+            $.get(`http://localhost:8080/${url}`)
+            .done((data) => {
+                content.innerHTML = `
+                <p class="content">
+                    ${data}
+                </p>`
+            })
+            .fail(data => {
+                
+                
+            
+            });    
+        }
+
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+.header {
+    background-color: #494141;
+
+    display: flex;
+    justify-content: center
+    
+}
+
+.header-container {
+    padding : 10px;
+    width: 80vw;
+
+    display: flex;
+    align-items: center;
+}
+
+.header-container > *{
+    text-transform: capitalize;
+    color : white
+}
+
+.header-container > * {
+    margin-left: 10px;
+}
+
+
+
+.header__title {
+    flex-grow: 1;
+}
+
+.header__title > a{
+    color : white
+}
+
+.header__log {
+    /* display: none; */
+}
+    
+
+#login {
+    cursor: pointer;
+}
