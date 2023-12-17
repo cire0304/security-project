@@ -18,17 +18,18 @@ const requestResister = () => {
         password: password,
         role: "ROLE_USER"
     };
-    fetch("http://localhost:8080/users", {
+    fetch("https://localhost:8080/users", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
+        credentials: "include", 
         body: JSON.stringify(data)
     })
       .then(res => res.json())
       .then(res => {
             if (res.success) {
-                alert(res.message);
+
             } else {
                 alert(res.message);
             }

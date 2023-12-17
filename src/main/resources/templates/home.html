@@ -102,19 +102,47 @@
     <script>
         const content = document.querySelector('.contents-container');
 
+
         let routing = url => {
-            $.get(`http://localhost:8080/${url}`)
-            .done((data) => {
-                content.innerHTML = `
-                <p class="content">
-                    ${data}
-                </p>`
+            $.ajax({
+                url: `https://localhost:8080/${url}`,
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                xhrFields: { 
+            	    withCredentials: true // 클라이언트와 서버가 통신할때 쿠키 값을 공유하겠다는 설정
+                },
+                success: res => {
+                    content.innerHTML = `
+                        <p class="content">
+                            ${res.responseText}
+                        </p>
+                        `
+                },
+                error: res => {
+                    content.innerHTML = `
+                        <p class="content">
+                            ${res.responseText}
+                        </p>
+                        `
+                }  
             })
-            .fail(data => {
-                
-                
-            
-            });    
+            // $.get(`https://localhost:8080/${url}`, 
+            // xhrFields : { 
+    	    // withCredentials: true // 클라이언트와 서버가 통신할때 쿠키 값을 공유하겠다는 설정
+            // })
+            // .done((data) => {
+            //     content.innerHTML = `
+            //     <p class="content">
+            //         ${data}
+            //     </p>`
+            // })
+            // .fail(data => {
+            //     content.innerHTML = `
+            //     <p class="content">
+            //         요청 실패
+            //     </p>`
+            // });    
         }
 
     </script>

@@ -17,11 +17,12 @@ const requestLogin = () => {
         username: username,
         password: password
     };
-    fetch("http://localhost:8080/login", {
+    fetch("https://localhost:8080/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
+        credentials: "include", 
         body: JSON.stringify(data)
     })
       .then(res => res.json())

@@ -6,7 +6,6 @@ import com.example.springsecurityoauth2jwt.security.handler.AjaxAccessDeniedHand
 import com.example.springsecurityoauth2jwt.security.handler.AjaxAuthenticationFailureHandler;
 import com.example.springsecurityoauth2jwt.security.handler.AjaxAuthenticationSuccessHandler;
 import com.example.springsecurityoauth2jwt.security.provider.AjaxAuthenticationProvider;
-import com.example.springsecurityoauth2jwt.security.service.CustomUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +27,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.context.DelegatingSecurityContextRepository;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -89,6 +91,15 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500", "https://127.0.0.1:5500"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
         return http
                 .authorizeHttpRequests(config -> config
                         .requestMatchers("/user").hasRole("USER")
@@ -104,7 +115,7 @@ public class SecurityConfig {
 //                )
                 .sessionManagement(config -> config
                         .maximumSessions(1)
-                        .maxSessionsPreventsLogin(false)
+                        .maxSessionsPreventsLogin(true)
                 )
                 .exceptionHandling(config -> config
                         .authenticationEntryPoint(new AjaxLoginAuthenticationEntryPoint())
@@ -112,7 +123,9 @@ public class SecurityConfig {
                 )
                 .addFilterBefore(ajaxLoginProcessingFilter(http), UsernamePasswordAuthenticationFilter.class)
                 .csrf(config -> config.disable())
-                .cors(config -> config.disable())
+                .cors(config -> config.configurationSource(source))
+                .headers(headerConfig -> headerConfig.httpStrictTransportSecurity(config -> config
+                        .preload(false)))
                 .build();
     }
 
