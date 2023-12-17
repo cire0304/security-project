@@ -1,13 +1,11 @@
 package com.example.springsecurityoauth2jwt.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,10 +13,11 @@ import java.util.Set;
 
 @Entity
 @Data
+@Builder
+@EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Account {
+public class Account implements Serializable{
 
     @Id
     @GeneratedValue

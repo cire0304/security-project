@@ -1,5 +1,11 @@
 package com.example.springsecurityoauth2jwt.config;
 
+import com.example.springsecurityoauth2jwt.security.common.AjaxLoginAuthenticationEntryPoint;
+import com.example.springsecurityoauth2jwt.security.filter.AjaxLoginProcessingFilter;
+import com.example.springsecurityoauth2jwt.security.handler.AjaxAccessDeniedHandler;
+import com.example.springsecurityoauth2jwt.security.handler.AjaxAuthenticationFailureHandler;
+import com.example.springsecurityoauth2jwt.security.handler.AjaxAuthenticationSuccessHandler;
+import com.example.springsecurityoauth2jwt.security.provider.AjaxAuthenticationProvider;
 import com.example.springsecurityoauth2jwt.security.service.CustomUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
@@ -8,12 +14,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.DelegatingSecurityContextRepository;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
 
 import java.io.PrintWriter;
 
@@ -30,20 +44,56 @@ public class SecurityConfig {
     public static final String REFRESH_TOKEN_URL = "/api/auth/token";
     public static final String API_ROOT_URL = "/api/**";
 
-    private final CustomUserDetailsService userDetailsService;
+    private final AuthenticationConfiguration authenticationConfiguration;
+    private final AjaxAuthenticationProvider ajaxAuthenticationProvider;
 
-    public void config(AuthenticationManagerBuilder auth) {
+    @Bean
+    public AjaxLoginProcessingFilter ajaxLoginProcessingFilter(HttpSecurity http) throws Exception {
+        AjaxLoginProcessingFilter ajaxLoginProcessingFilter = new AjaxLoginProcessingFilter(http);
+        ajaxLoginProcessingFilter.setFilterProcessesUrl("/login");
+        ajaxLoginProcessingFilter.setAuthenticationManager(authenticationManager());
+        ajaxLoginProcessingFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
+        ajaxLoginProcessingFilter.setAuthenticationFailureHandler(authenticationFailureHandler());
+        return ajaxLoginProcessingFilter;
+    }
 
+    @Bean
+    public AuthenticationManager authenticationManager() throws Exception {
+        ProviderManager authenticationManager = (ProviderManager) authenticationConfiguration.getAuthenticationManager();
+        authenticationManager.getProviders().add(ajaxAuthenticationProvider);
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new AjaxAuthenticationSuccessHandler(delegatingSecurityContextRepository());
+    }
+
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new AjaxAuthenticationFailureHandler();
+    }
+
+    @Bean
+    public AccessDeniedHandler ajaxAccessDeniedHandler() {
+        return new AjaxAccessDeniedHandler();
+    }
+
+    @Bean
+    public DelegatingSecurityContextRepository delegatingSecurityContextRepository() {
+        return new DelegatingSecurityContextRepository(
+                new RequestAttributeSecurityContextRepository(),
+                new HttpSessionSecurityContextRepository()
+        );
     }
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(config -> config
-                        .requestMatchers("/").permitAll()
                         .requestMatchers("/user").hasRole("USER")
                         .requestMatchers("/admin").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
 //                .oauth2Login(login -> login
 //                        .loginPage("/login")
@@ -52,12 +102,15 @@ public class SecurityConfig {
 //                                .userService()
 //                        )
 //                )
-                .formLogin(config -> config.permitAll())
-                .userDetailsService(userDetailsService)
-                .exceptionHandling(config -> config
-                        .authenticationEntryPoint(unauthorizedEntryPoint)
-                        .accessDeniedHandler(accessDeniedHandler)
+                .sessionManagement(config -> config
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false)
                 )
+                .exceptionHandling(config -> config
+                        .authenticationEntryPoint(new AjaxLoginAuthenticationEntryPoint())
+                        .accessDeniedHandler(ajaxAccessDeniedHandler())
+                )
+                .addFilterBefore(ajaxLoginProcessingFilter(http), UsernamePasswordAuthenticationFilter.class)
                 .csrf(config -> config.disable())
                 .cors(config -> config.disable())
                 .build();
@@ -70,18 +123,6 @@ public class SecurityConfig {
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                 String json = new ObjectMapper().writeValueAsString(fail);
-                PrintWriter writer = response.getWriter();
-                writer.write(json);
-                writer.flush();
-            };
-
-    private final AccessDeniedHandler accessDeniedHandler =
-            (request, response, accessDeniedException) -> {
-                ErrorResponse fail = new ErrorResponse(HttpStatus.FORBIDDEN, "Spring security forbidden...");
-
-                response.setStatus(HttpStatus.FORBIDDEN.value());
-                String json = new ObjectMapper().writeValueAsString(fail);
-                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                 PrintWriter writer = response.getWriter();
                 writer.write(json);
                 writer.flush();

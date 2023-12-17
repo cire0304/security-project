@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="../static/css/sidebar.css">
     <link rel="stylesheet" href="../static/css/util.css">
     <link rel="stylesheet" href="../static/css/body.css">
-    <link rel="stylesheet" href="../static/css/loginForm.css">
-
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="../static/css/register.css">
+    
     <title>Document</title>
 </head>
 
@@ -24,17 +25,18 @@
                 core spring security
                 <!-- <p href="/">core spring security</p> -->
             </p>
-            <a href="/home" class="header__home f-24">home</a>
+            
             <a href="/logout" class="header__log f-24">logout</a>
+            
+            <p id="register" class="f-24">register</p>
             <p id="login" class="f-24">login</p>
 
         </div>
     </header>
 
-    <div class="login-bg">
-        <div class="login-container">
-            <form action="/login" method="post" class="login" onclick="">
-
+    <div class="modal-bg">
+        <div class="modal-container">
+            <div class="login" >
                 <div class="login__title">
                     로그인
                 </div>
@@ -45,10 +47,30 @@
                     <input type="password" id="password" name="password" placeholder="비밀번호">
                 </div>
                 <div class="login__submit">
-                    <button type="submit" class="login__btn">로그인</button>
-                    <button type="submit" class="login__btn">회원 가입</button>
+                    <button class="btn" onclick="requestLogin()">로그인</button>
+                    <button class="btn">회원 가입</button>
                 </div> 
-            </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modal-reg" class="modal-bg">
+        <div class="modal-container">
+            <div class="login" >
+                <div class="login__title">
+                    회원가입
+                </div>
+                <div class="login__input">
+                    <input type="text" id="username-reg" name="username" placeholder="아이디">
+                </div>
+                <div class="login__input">
+                    <input type="password" id="password-reg" name="password" placeholder="비밀번호">
+                </div>
+                <div class="login__submit">
+                    <button class="btn" onclick="requestResister()">회원가입</button>
+                </div> 
+            </div>
         </div>
     </div>
         
@@ -76,6 +98,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../static/js/login.js"></script>
+    <script src="../static/js/register.js"></script>
     <script>
         const content = document.querySelector('.contents-container');
 
