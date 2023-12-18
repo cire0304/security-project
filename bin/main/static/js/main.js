@@ -1,5 +1,5 @@
 import { renderDetail } from './todoDetail.js'
-import { createNewTodo, createTodoElement} from './todo.js';
+import { createNewTodo, createTodoElement } from './todo.js';
 
 const list = document.querySelector("#list");
 const createBtn = document.querySelector("#create-btn");
@@ -48,3 +48,20 @@ createBtn.addEventListener("click", () => {
 });
 
 renderTodos();
+
+
+document.querySelector('.back-btn').addEventListener('click', function () {
+    const detail = document.querySelector('.detail-container');
+    const todo = document.querySelector('#todo');
+    if (detail.classList.contains('appear')) {
+        detail.classList.add('disappear');
+        setTimeout(function () { detail.classList.remove('appear') }, 500);
+    }
+
+    setTimeout(function () {
+
+        todo.classList.remove('hidden');
+        todo.classList.add('appear');
+    }, 500);
+    
+});

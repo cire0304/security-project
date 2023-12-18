@@ -40,5 +40,10 @@ export function renderDetail(item, saveToLocalStorage) {
     todoDetail.innerHTML = '';
     todoDetail.append(detailDec);
     todoDetail.append(detailText);
-}
 
+    document.querySelector('.hidden').classList.remove('disappear');
+    document.querySelector('.hidden').classList.add('appear');
+    const target = document.querySelector('#todo');
+    target.classList.add('hidden');
+    document.querySelector('#todo').classList.remove('appear');;
+}

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../static/css/general.css">
     <link rel="stylesheet" href="../static/css/main.css">
     <link rel="stylesheet" href="../static/css/header.css">
-    <link rel="stylesheet" href="../static/css/content.css">
+    <link rel="stylesheet" href="../static/css/todo.css">
     <link rel="stylesheet" href="../static/css/item.css">
     <link rel="stylesheet" href="../static/css/detail.css">
 
@@ -19,7 +19,7 @@
 <body>
 
 
-    <div class="main-continer">
+    <div class="main-container">
         <nav class="main-navbar">
             <p>To-List</p>
             <p>History</p>
@@ -29,6 +29,8 @@
             <h1 class="header__title">오늘도 힘내보자</h1>
         </header>
 
+        <button class="back-btn">뒤로가기</button>
+
         <div class="main-input">
             <input id="create-text" type="text" placeholder="투두 이름을 입력해주세요">
             <button id="create-btn">Click</button>
@@ -36,44 +38,19 @@
 
         <div class="main-body">
 
-            <div id="todo" class="content-container">
+            <div id="todo" class="todo-container">
 
-                <h3 class="content__title">To-DO</h3>
-                <div id="list" class="content__items">
-
-
-                    <!-- <div class="item">
-                        <div class="item__description">
-                            <h3 class="item__title">제목</h3>
-                            <p class="item__comment">코멘트</p>
-                        </div>
-                        <div class="item__info">
-                            <p class="item__date">2023/3/4/ 18:42</p>
-                            <button class="item__remove remove-btn">remove</button>
-                        </div>
-                    </div> -->
-
-
+                <h3 class="todo__title">To-Do</h3>
+                <div id="list" class="todo__items">
                 </div>
             </div>
 
-            <div id="todo-detail" class="detail-container">
-                <!-- <div class="detail__description">
-                    <h3 class="detail__title">지금 해야할 일</h3>
-                    <p class="detail__state">상태 : Doing</p>
-                    <p class="detail__comment">코멘트 : 오늘도 화이팅</p>
-                    <p class="detail__date">등록일 : 2021- </p>
-                </div>
-                <textarea class="detail__text">
-                    이것은 내용이야
-                </textarea> -->
-
+            <div id="todo-detail" class="detail-container hidden">
             </div>
 
 
         </div>
 
-        <!-- <script src="../static/js/main.js"></script> -->
         <script src="../static/js/main.js" type="module"></script>
     </div>
 
