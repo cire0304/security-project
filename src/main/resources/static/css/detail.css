@@ -1,0 +1,45 @@
+.detail-container {
+    flex-grow: 1;
+    margin: 10px 10px 10px 40px;
+    padding: 15px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+    border: none;
+    border-radius: 5px;
+
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.detail__description {
+    padding: 10px;
+    width: 100%;
+
+    border-radius: 4px;
+
+    background-color: white;
+
+}
+
+.detail__text {
+    padding: 10px;
+    width: 100%;
+
+    flex-grow: 1;
+
+    border-radius: 4px;
+
+    background-color: white;
+
+    font-size: 18px;
+
+    resize: none;
+    color: black;
+    border: none;
+    border-bottom: 2px solid #0000007e;
+    outline: none;
+}
