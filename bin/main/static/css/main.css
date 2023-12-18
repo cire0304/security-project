@@ -1,0 +1,27 @@
+.main-continer {
+    width: 100vw;
+    height: 100vw;
+
+    background-color: #0D1117;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-navbar {
+    margin: 10px;
+
+    display: flex;
+
+    align-self: start;
+    gap: 10px;
+}
+
+.main-body {
+    width: 100vw;
+
+    display: flex;
+    justify-content: center;
+}
+
