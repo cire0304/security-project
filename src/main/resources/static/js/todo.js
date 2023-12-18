@@ -1,18 +1,5 @@
-import { renderDetail } from './todoDetail.js'
 
-// const list = document.querySelector("#list");
-// const createBtn = document.querySelector("#create-btn");
-// const createText = document.querySelector("#create-text");
-
-// let todos = [];
-
-// createBtn.addEventListener("click", createNewTodo);
-
-export function createNewTodo() {
-    const title = createText.value;
-    createText.value = '';
-    
-    // 새로운 아이템 객체 생성
+export function createNewTodo(title) {
     const item = {
         id: new Date().getTime(),
         title: title,
@@ -22,16 +9,11 @@ export function createNewTodo() {
         date: new Date().toLocaleString(),
     }
 
-    todos.unshift(item);
     const itemEl = createTodoElement(item);
-
-    list.prepend(itemEl);
-
-
-    saveToLocalStorage()
+    return { item, itemEl };
 }
 
-function createTodoElement(item) {
+export function createTodoElement(item) {
 
     const itemEl = document.createElement('div');
     itemEl.classList.add('item')
@@ -66,37 +48,18 @@ function createTodoElement(item) {
     itemEl.append(itemInfo);
 
     itemRemoveBtn.addEventListener('click', () => {
-        todos = todos.filter((todo) => todo.id!== item.id);
+        let data = localStorage.getItem('todos');
+        let todos;
+        if (data) {
+            todos = JSON.parse(data);
+        }
+
+        todos = todos.filter((todo) => todo.id !== item.id);
         itemEl.remove();
-        saveToLocalStorage()
-    }); 
+        
+        data = JSON.stringify(todos);
+        localStorage.setItem('todos', data);
+    });
 
     return itemEl;
 }
-
-
-function saveToLocalStorage() {
-    const data = JSON.stringify(todos);
-    localStorage.setItem('todos', data);
-}
-
-function loadFromLocalStorage() {
-    const data = localStorage.getItem('todos');
-    if (data) {
-        todos = JSON.parse(data);
-    }
-}
-
-function renderTodos() {
-    loadFromLocalStorage();
-    todos.forEach((todo) => {
-        const itemEl = createTodoElement(todo);
-        list.append(itemEl);
-
-        itemEl.addEventListener('click', () => {
-            renderDetail(todo);
-        });
-    });
-}
-
-renderTodos();

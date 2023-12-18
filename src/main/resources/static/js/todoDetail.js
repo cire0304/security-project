@@ -1,6 +1,7 @@
 const todoDetail = document.querySelector("#todo-detail");
 
-export function renderDetail(item) {
+export function renderDetail(item, saveToLocalStorage) {
+    console.log(saveToLocalStorage);
 
     const detailDec = document.createElement('div');
     detailDec.classList.add('detail__description');
@@ -14,7 +15,7 @@ export function renderDetail(item) {
     detailState.classList.add('detail__state');
 
     const detailComment = document.createElement('p');
-    detailComment.innerHTML = `코멘트: ${item.text}`;
+    detailComment.innerHTML = `코멘트: ${item.comment}`;
     detailComment.classList.add('detail__comment');
 
     const detailDate = document.createElement('p');
@@ -30,9 +31,10 @@ export function renderDetail(item) {
     detailText.classList.add('detail__text');
     detailText.textContent = item.text;
 
-    detailText.addEventListener('input', (e) => {
+    detailText.addEventListener('blur', (e) => {
         item.text = detailText.value;
-        saveToLocalStorage()
+        saveToLocalStorage();
+
     });
 
     todoDetail.innerHTML = '';

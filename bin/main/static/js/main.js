@@ -1,14 +1,11 @@
 import { renderDetail } from './todoDetail.js'
-import { createNewTodo } from './todo.js';
+import { createNewTodo, createTodoElement} from './todo.js';
 
 const list = document.querySelector("#list");
 const createBtn = document.querySelector("#create-btn");
 const createText = document.querySelector("#create-text");
 
 let todos = [];
-
-createBtn.addEventListener("click", createNewTodo, saveToLocalStorage, loadFromLocalStorage);
-
 
 function saveToLocalStorage() {
     const data = JSON.stringify(todos);
@@ -28,10 +25,26 @@ function renderTodos() {
         const itemEl = createTodoElement(todo);
         list.append(itemEl);
 
-        itemEl.addEventListener('click', () => {
-            renderDetail(todo);
+        itemEl.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('item__remove')) {
+                renderDetail(todo, saveToLocalStorage);
+            }
         });
     });
 }
+
+createBtn.addEventListener("click", () => {
+    const { item, itemEl } = createNewTodo(createText.value);
+    createText.value = '';
+    todos.unshift(item);
+    list.prepend(itemEl);
+
+    itemEl.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('item__remove')) {
+            renderDetail(item, saveToLocalStorage);
+        }
+    });
+    saveToLocalStorage();
+});
 
 renderTodos();
