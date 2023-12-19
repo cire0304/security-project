@@ -1,7 +1,7 @@
 import { renderDetail } from './todoDetail.js'
 import { createNewTodo, createTodoElement } from './todo.js';
 
-const list = document.querySelector("#list");
+const todoList = document.querySelector("#todo-list");
 const createBtn = document.querySelector("#create-btn");
 const createText = document.querySelector("#create-text");
 
@@ -21,13 +21,20 @@ function loadFromLocalStorage() {
 
 function renderTodos() {
     loadFromLocalStorage();
-    todos.forEach((todo) => {
-        const itemEl = createTodoElement(todo);
-        list.append(itemEl);
+    todoList.innerHTML = '';
+    todos.forEach((item) => {
+        const itemEl = createTodoElement(item);
+        todoList.append(itemEl);
+        
+        itemEl.querySelector('.remove-btn').addEventListener('click', () =>{
+            todos = todos.filter((todo) => todo.id !== item.id);
+            itemEl.remove();
+            saveToLocalStorage();
+        });
 
         itemEl.addEventListener('click', (e) => {
             if (!e.target.classList.contains('item__remove')) {
-                renderDetail(todo, saveToLocalStorage);
+                renderDetail(item, saveToLocalStorage);
             }
         });
     });
@@ -37,14 +44,9 @@ createBtn.addEventListener("click", () => {
     const { item, itemEl } = createNewTodo(createText.value);
     createText.value = '';
     todos.unshift(item);
-    list.prepend(itemEl);
 
-    itemEl.addEventListener('click', (e) => {
-        if (!e.target.classList.contains('item__remove')) {
-            renderDetail(item, saveToLocalStorage);
-        }
-    });
     saveToLocalStorage();
+    renderTodos();
 });
 
 renderTodos();
@@ -59,7 +61,6 @@ document.querySelector('.back-btn').addEventListener('click', function () {
     }
 
     setTimeout(function () {
-
         todo.classList.remove('hidden');
         todo.classList.add('appear');
     }, 500);

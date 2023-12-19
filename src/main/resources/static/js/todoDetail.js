@@ -34,7 +34,6 @@ export function renderDetail(item, saveToLocalStorage) {
     detailText.addEventListener('blur', (e) => {
         item.text = detailText.value;
         saveToLocalStorage();
-
     });
 
     todoDetail.innerHTML = '';

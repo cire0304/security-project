@@ -16,7 +16,9 @@ export function createNewTodo(title) {
 export function createTodoElement(item) {
 
     const itemEl = document.createElement('div');
-    itemEl.classList.add('item')
+    // 드레그 가능하도록 변경
+    itemEl.classList.add('item', 'draggable')
+    itemEl.setAttribute('draggable', 'true');
 
     const itemDec = document.createElement('div');
     itemDec.classList.add('item__description');
@@ -46,20 +48,6 @@ export function createTodoElement(item) {
 
     itemEl.append(itemDec);
     itemEl.append(itemInfo);
-
-    itemRemoveBtn.addEventListener('click', () => {
-        let data = localStorage.getItem('todos');
-        let todos;
-        if (data) {
-            todos = JSON.parse(data);
-        }
-
-        todos = todos.filter((todo) => todo.id !== item.id);
-        itemEl.remove();
-        
-        data = JSON.stringify(todos);
-        localStorage.setItem('todos', data);
-    });
 
     return itemEl;
 }

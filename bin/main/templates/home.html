@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../static/css/todo.css">
     <link rel="stylesheet" href="../static/css/item.css">
     <link rel="stylesheet" href="../static/css/detail.css">
+    <link rel="stylesheet" href="../static/css/drag.css">
 
 
 
@@ -38,10 +39,15 @@
 
         <div class="main-body">
 
-            <div id="todo" class="todo-container">
-
+            <div id="todo" class="todo-container container">
                 <h3 class="todo__title">To-Do</h3>
-                <div id="list" class="todo__items">
+                <div id="todo-list" class="todo__items">
+                </div>
+            </div>
+
+            <div id="done" class="todo-container container">
+                <h3 class="todo__title">Done</h3>
+                <div id="done-list" class="todo__items">
                 </div>
             </div>
 
@@ -52,6 +58,7 @@
         </div>
 
         <script src="../static/js/main.js" type="module"></script>
+        <script src="../static/js/drag.js" type="module"></script>
     </div>
 
 </body>
