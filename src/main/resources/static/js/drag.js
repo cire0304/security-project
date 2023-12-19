@@ -5,19 +5,17 @@ const containers = document.querySelectorAll(".container");
 draggables.forEach(draggable => {
     draggable.addEventListener("dragstart", () => {
         draggable.classList.add("dragging");
-        console.log("event started");
     });
 
     draggable.addEventListener("dragend", () => {
         draggable.classList.remove("dragging");
-        console.log("event ended");
+        
     });
 });
 
 containers.forEach(container => {
     container.addEventListener("dragover", e => {
       e.preventDefault();
-      console.log('dragover');
       const afterElement = getDragAfterElement(container, e.clientY);
       const dragging = document.querySelector(".dragging");
       if (afterElement === undefined) {

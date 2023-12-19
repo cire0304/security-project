@@ -28,20 +28,32 @@
 
         <header class="main-header">
             <h1 class="header__title">오늘도 힘내보자</h1>
+
+            <div class="header__input">
+                <input id="create-text" type="text" placeholder="">
+                <button id="create-btn" class="btn" style="
+                position: relative;
+                left: -30px;">
+                    Add task
+                </button>
+            </div>
+
+            <button class="back-btn btn">Back</button>
+
         </header>
 
-        <button class="back-btn">뒤로가기</button>
-
-        <div class="main-input">
-            <input id="create-text" type="text" placeholder="투두 이름을 입력해주세요">
-            <button id="create-btn">Click</button>
-        </div>
 
         <div class="main-body">
 
             <div id="todo" class="todo-container container">
                 <h3 class="todo__title">To-Do</h3>
                 <div id="todo-list" class="todo__items">
+                </div>
+            </div>
+
+            <div id="doing" class="todo-container container">
+                <h3 class="todo__title">Doing</h3>
+                <div id="doing-list" class="todo__items">
                 </div>
             </div>
 
@@ -59,6 +71,7 @@
 
         <script src="../static/js/main.js" type="module"></script>
         <script src="../static/js/drag.js" type="module"></script>
+        <script src="../static/js/header.js"></script>
     </div>
 
 </body>
