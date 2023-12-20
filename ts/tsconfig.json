@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./build/js",
+        "module": "ESNext",
+        "target": "es2015",
+        "noEmitOnError": true,
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "lib": ["ESNext", "DOM"],
+        "strict": true
+        // "sourceMap": true,
+    }
+}
