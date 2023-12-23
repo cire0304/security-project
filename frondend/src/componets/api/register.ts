@@ -11,10 +11,9 @@ export const postRegister = async (registerData: data) => {
         const res = await axios.post(
             '/register', 
             registerData, 
-            {withCredentials: false}
+            {withCredentials: true}
         );
 
-        console.log("요청 성공");
         console.log(res.data);
         return res;
     } catch (err) {

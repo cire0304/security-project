@@ -3,10 +3,12 @@ import MainLogo from '../../components/MainLogo'
 import * as S from './styles'
 import Button from '../../components/Button'
 import { postRegister } from '../../api/register'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const RegisterPage = () => {
   const [emailInputValue, setEmailInputValue] = useState("")
   const [passwordInputValue, setPasswordInputValue] = useState("")
+  const navigate = useNavigate();
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmailInputValue(e.target.value);
@@ -21,7 +23,11 @@ const RegisterPage = () => {
       username: emailInputValue,
       password: passwordInputValue,
     };
+    
+    // res: 요청이 실패했을 경우 반환값은 null
     const res = await postRegister(data);
+
+    navigate('/');
 
   }
 

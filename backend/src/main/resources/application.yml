@@ -75,10 +75,10 @@ server:
             cookie:
                 same-site: none
                 secure: true
-    ssl:
-        key-store: keystore.p12
-        key-store-password: 123456
-        keyStoreType: PKCS12
-        keyAlias: tomcat
+#    ssl:
+#        key-store: keystore.p12
+#        key-store-password: 123456
+#        keyStoreType: PKCS12
+#        keyAlias: tomcat
 
 #server.servlet.session.cookie.secure=true

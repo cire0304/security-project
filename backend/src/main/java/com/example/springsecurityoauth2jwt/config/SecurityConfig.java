@@ -93,7 +93,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500", "https://127.0.0.1:5500", "http://127.0.0.1:3000", "https://127.0.0.1:3000", "http://localhost:3000"));
+        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500", "https://127.0.0.1:5500", "http://127.0.0.1:3000", "https://127.0.0.1:3000", "http://localhost:3000", "https://localhost:3000"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
 

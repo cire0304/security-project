@@ -11,7 +11,7 @@ export const postLogin = async (loginData: data) => {
         const res = await axios.post(
             '/login', 
             loginData, 
-            {withCredentials: false}
+            {withCredentials: true}
         );
 
         console.log("요청 성공");

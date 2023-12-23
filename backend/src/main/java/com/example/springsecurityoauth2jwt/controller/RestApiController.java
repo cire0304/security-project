@@ -49,11 +49,8 @@ public class RestApiController {
         return "어드민 페이지";
     }
 
-    @PostMapping("/users")
+    @PostMapping("/register")
     public String createUser(@RequestBody AccountDto accountDto) {
-//        Role role = roleRepository.findRoleByRoleName(accountDto.getRole())
-//                .orElseThrow(() -> new NoSuchElementException());
-
         Account account = Account.builder()
                 .username(accountDto.getUsername())
                 .password(accountDto.getPassword())

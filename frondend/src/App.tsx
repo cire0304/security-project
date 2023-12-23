@@ -9,6 +9,7 @@ import GlobalStyles from "./componets/styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import theme from "./componets/styles/theme";
 import RegisterPage from "./componets/pages/Register";
+import MyPage from "./componets/pages/Mypage";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage />,
+      },
+      {
+        path: "/mypage",
+        element: <MyPage />,
       }
     ],
   },
