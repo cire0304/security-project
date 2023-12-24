@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+// 유저에 대한 정보를 담고 있는 객체
 public interface ProviderUser {
 
     String getId();

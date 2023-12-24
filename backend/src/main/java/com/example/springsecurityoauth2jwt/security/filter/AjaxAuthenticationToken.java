@@ -13,6 +13,7 @@ public class AjaxAuthenticationToken extends AbstractAuthenticationToken {
     private final Object principal;
 
     private Object credentials;
+
     public AjaxAuthenticationToken(Object principal, Object credentials) {
         super(null);
         this.principal = principal;

@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-// OAuth2User: 엑세스 토큰을 이용하여 가져온 유저에 대한 정보를 담고 있는 객체
+//  OAuth2 를 통해 가져온 유저에 대한 정보를 담고 있는 객체
 public abstract class OAuth2ProviderUser implements ProviderUser{
 
     private final Map<String, Object> attributes;
     private final OAuth2User oAuth2User;
     private final ClientRegistration clientRegistration;
 
+    // OAuth2User: 엑세스 토큰을 통해 가져온 유저에 대한 정보를 담고 있는 객체
     public OAuth2ProviderUser(Map<String, Object> attributes, OAuth2User oAuth2User, ClientRegistration clientRegistration) {
         this.attributes = attributes;
         this.oAuth2User = oAuth2User;

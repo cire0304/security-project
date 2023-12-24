@@ -2,6 +2,7 @@ package com.example.springsecurityoauth2jwt.security.service;
 
 import com.example.springsecurityoauth2jwt.domain.entity.Account;
 import com.example.springsecurityoauth2jwt.repository.UserRepository;
+import com.example.springsecurityoauth2jwt.security.model.PrincipalUser;
 import com.example.springsecurityoauth2jwt.security.model.ProviderUser;
 import com.example.springsecurityoauth2jwt.security.model.User;
 import com.example.springsecurityoauth2jwt.service.UserService;
@@ -43,6 +44,6 @@ public class CustomOAuth2UserService extends AbstractOAuth2UserService implement
             userService.createUser(account);
         }
 
-        return oAuth2User;
+        return new PrincipalUser(providerUser);
     }
 }

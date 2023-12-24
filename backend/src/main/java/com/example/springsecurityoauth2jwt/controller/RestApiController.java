@@ -5,11 +5,14 @@ import com.example.springsecurityoauth2jwt.domain.entity.Account;
 import com.example.springsecurityoauth2jwt.domain.entity.Role;
 import com.example.springsecurityoauth2jwt.repository.RoleRepository;
 import com.example.springsecurityoauth2jwt.repository.UserRepository;
+import com.example.springsecurityoauth2jwt.security.model.PrincipalUser;
 import com.example.springsecurityoauth2jwt.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,8 +43,13 @@ public class RestApiController {
     }
 
     @GetMapping("/user")
-    public String user() {
-        return "유저 페이지";
+    public String user(@AuthenticationPrincipal PrincipalUser principalUser) {
+        String username = principalUser.getUsername();
+
+         Account account = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("잘못된 사용자 입니다."));
+
+        return account.getUsername();
     }
 
     @GetMapping("/admin")
