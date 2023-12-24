@@ -1,6 +1,7 @@
 package com.example.springsecurityoauth2jwt.config;
 
 import com.example.springsecurityoauth2jwt.security.common.AjaxLoginAuthenticationEntryPoint;
+import com.example.springsecurityoauth2jwt.security.common.CustomAuthorityMapper;
 import com.example.springsecurityoauth2jwt.security.filter.AjaxLoginProcessingFilter;
 import com.example.springsecurityoauth2jwt.security.handler.AjaxAccessDeniedHandler;
 import com.example.springsecurityoauth2jwt.security.handler.AjaxAuthenticationFailureHandler;
@@ -19,6 +20,8 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
+import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -54,8 +57,9 @@ public class SecurityConfig {
     public AjaxLoginProcessingFilter ajaxLoginProcessingFilter(HttpSecurity http) throws Exception {
         AjaxLoginProcessingFilter ajaxLoginProcessingFilter = new AjaxLoginProcessingFilter(http);
         ajaxLoginProcessingFilter.setFilterProcessesUrl("/login");
+        ajaxLoginProcessingFilter.setSecurityContextRepository(delegatingSecurityContextRepository());
         ajaxLoginProcessingFilter.setAuthenticationManager(authenticationManager());
-        ajaxLoginProcessingFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
+//        ajaxLoginProcessingFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
         ajaxLoginProcessingFilter.setAuthenticationFailureHandler(authenticationFailureHandler());
         return ajaxLoginProcessingFilter;
     }
@@ -135,24 +139,9 @@ public class SecurityConfig {
                 .build();
     }
 
-    private final AuthenticationEntryPoint unauthorizedEntryPoint =
-            (request, response, authException) -> {
-                ErrorResponse fail = new ErrorResponse(HttpStatus.FORBIDDEN, "Spring security forbidden...");
-
-                response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                String json = new ObjectMapper().writeValueAsString(fail);
-                PrintWriter writer = response.getWriter();
-                writer.write(json);
-                writer.flush();
-            };
-
-    @Getter
-    @RequiredArgsConstructor
-    public class ErrorResponse {
-
-        private final HttpStatus status;
-        private final String message;
+    @Bean
+    public GrantedAuthoritiesMapper grantedAuthoritiesMapper() {
+        return new CustomAuthorityMapper();
     }
 
 }

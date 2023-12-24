@@ -2,6 +2,7 @@ package com.example.springsecurityoauth2jwt.security.service;
 
 import com.example.springsecurityoauth2jwt.repository.UserRepository;
 import com.example.springsecurityoauth2jwt.security.model.GoogleUser;
+import com.example.springsecurityoauth2jwt.security.model.KakaoUser;
 import com.example.springsecurityoauth2jwt.security.model.ProviderUser;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,31 +20,13 @@ public class AbstractOAuth2UserService {
 
     protected ProviderUser providerUser(ClientRegistration clientRegistration, OAuth2User oAuth2User) {
 
-        String registrationId =  clientRegistration.getRegistrationId();
+        String registrationId = clientRegistration.getRegistrationId();
         if (registrationId.equals("google")) {
             return new GoogleUser(oAuth2User, clientRegistration);
         } else if (registrationId.equals("kakao")) {
-            return new GoogleUser(oAuth2User, clientRegistration);
+            return new KakaoUser(oAuth2User, clientRegistration);
         }
         return null;
     }
-
-//    @Autowired
-//    private ProviderUserConvter<ProviderUserRequest, ProviderUser> providerUserConvter;
-
-//    protected void register(ProviderUser providerUser, OAuth2UserRequest userRequest) {
-//        User user = userRepository.findByUsername(providerUser.getUserName());
-//
-//        if (user == null) {
-//            userService.register(userRequest.getClientRegistration().getRegistrationId(), providerUser);
-//        } else {
-//            System.out.println("user = " + user);
-//        }
-//
-//    }
-
-//    protected ProviderUser providerUser(ProviderUserRequest providerUserRequest) {
-//        return providerUserConvter.converter(providerUserRequest);
-//    }
 
 }

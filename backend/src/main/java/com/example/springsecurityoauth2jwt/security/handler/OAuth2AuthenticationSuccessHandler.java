@@ -26,15 +26,6 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
     }
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        OAuth2User principal = (OAuth2User) authentication.getPrincipal();
-
-        response.setStatus(HttpStatus.OK.value());
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
-        context.setAuthentication(authentication);
-        securityContextRepository.saveContext(context, request, response);
-
-        objectMapper.writeValue(response.getWriter(), principal);
+        response.sendRedirect("https://localhost:3000/mypage");
     }
 }

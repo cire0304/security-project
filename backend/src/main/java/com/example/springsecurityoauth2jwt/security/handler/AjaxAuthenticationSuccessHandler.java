@@ -35,6 +35,6 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
         context.setAuthentication(authentication);
         securityContextRepository.saveContext(context, request, response);
 
-        objectMapper.writeValue(response.getWriter(), principal);
+//        objectMapper.writeValue(response.getWriter(), principal);
     }
 }

@@ -30,10 +30,8 @@ const router = createBrowserRouter([
         path: "/mypage",
         element: <MyPage />,
       },
-      {
-        path: "/login/oauth2/code/kakao",
-        element: <KakaoLoginHandler />
-      }
+      
+
     ],
   },
 ]);
