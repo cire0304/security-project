@@ -4,6 +4,15 @@ import "./styles.css";
 import { useNavigate } from "react-router-dom";
 import { postLogin } from "../../api/login";
 import MainLogo from "../../components/MainLogo";
+import {
+  GOOGLE_LOGIN_URL,
+  KAKAO_CLIENT_ID,
+  KAKAO_LOGIN_URL,
+  KAKAO_OAUTH_URL,
+  KAKAO_REDIRECT_URI,
+} from "../../constants/login";
+import axios from "../../api/axios";
+
 const LoginPage = () => {
   const navigate = useNavigate();
 
@@ -27,29 +36,12 @@ const LoginPage = () => {
       username: emailInputValue,
       password: passwordInputValue,
     };
-    const res = await postLogin(data);
-
-    // fetch("https://localhost:8080/login", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   credentials: "include",
-    //   body: JSON.stringify(data),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     if (res.success) {
-    //       alert(res.message);
-    //     } else {
-    //       alert(res.message);
-    //     }
-    //   });
+    await postLogin(data);
+    navigate("/mypage");
   };
 
   return (
     <div className="container">
-
       <MainLogo />
 
       <div className="input">
@@ -73,7 +65,26 @@ const LoginPage = () => {
         <Button className="" onClick={(e) => registerHandler(e)}>
           회원가입
         </Button>
-        <Button>카카오로 시작</Button>
+        <Button
+          onClick={() => {
+            window.location.href = KAKAO_LOGIN_URL;
+
+            // axios.get('/oauth2/authorization/kakao',{
+            //   headers: {
+            //     "Content-Type": "application/json;charset=utf-8",
+            //     "Access-Control-Allow-Origin": "https://kauth.kakao.com/oauth/authorize" ,
+            // }});
+          }}
+        >
+          카카오로 시작
+        </Button>
+        <Button
+          onClick={() => {
+            window.location.href = GOOGLE_LOGIN_URL;
+          }}
+        >
+          구글로 시작
+        </Button>
       </div>
     </div>
   );

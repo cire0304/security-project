@@ -1,11 +1,12 @@
+
 spring:
     security:
         oauth2:
             client:
                 registration:
                     google:
-                        client-id: 823010453529-vtpf78akl4dc0rn8s9uq649v1crtpn0t.apps.googleusercontent.com
-                        client-secret: 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
+                        client-id: 833958086342-8qnk6sqc3vqhkbmnsnjpv67qslcnv7a9.apps.googleusercontent.com
+                        client-secret: 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
                         scope: openid,profile,email
 
                     naver:
@@ -17,14 +18,18 @@ spring:
                         scope: profile,email
 
                     kakao:
-                        client-id: f85b2099323eb29df38f7a0148c219b0
-                        client-secret: TOHAzPPhCT6xaSBWOrsjocp4IdVHGJ7w
+                        client-id: 7899e32aab9c80cf91b091578721da0f
+                        client-secret: lhDywbjR8YNQWhyZxkUz991KrbW33g5v
                         authorization-grant-type: authorization_code
-                        client-authentication-method: POST
+#                        client-authentication-method: POST # 안됨
+                        client-authentication-method: client_secret_post
+#                        client-authentication-method: client_secret_basic
                         client-name: re100Kakao
-                        redirect-uri: http://localhost:8081/login/oauth2/code/kakao
+                        redirect-uri: http://localhost:8080/login/oauth2/code/kakao
+#                        redirect-uri: https://localhost:3000/login/oauth2/code/kakao
                         #                        scope: openid,profile_nickname,profile_image,account_email
-                        scope: profile_nickname,profile_image,account_email
+                        scope: profile_nickname
+#                        scope: profile_nickname,profile_image,account_email
                 provider:
                     naver:
                         authorization-uri: https://nid.naver.com/oauth2.0/authorize
@@ -39,6 +44,7 @@ spring:
                         token-uri: https://kauth.kakao.com/oauth/token
                         user-info-uri: https://kapi.kakao.com/v2/user/me
                         user-name-attribute: id # OpenID Connect ? ????? ???? ?? ??
+
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:3306/coupon_db?characterEncoding=UTF-8&serverTimezone=UTC
@@ -75,6 +81,7 @@ server:
             cookie:
                 same-site: none
                 secure: true
+    port: 8080
 #    ssl:
 #        key-store: keystore.p12
 #        key-store-password: 123456

@@ -93,7 +93,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500", "https://127.0.0.1:5500", "http://127.0.0.1:3000", "https://127.0.0.1:3000", "http://localhost:3000", "https://localhost:3000"));
+        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5500", "https://127.0.0.1:5500", "http://127.0.0.1:3000", "https://127.0.0.1:3000", "http://localhost:3000", "https://localhost:3000", "https://localhost:8080", "http://localhost:8080"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
 
@@ -106,12 +106,17 @@ public class SecurityConfig {
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().permitAll()
                 )
-//                .oauth2Login(login -> login
+                .logout(config -> config
+                        .logoutSuccessUrl("/")
+                )
+                .oauth2Login(config -> config
+
 //                        .loginPage("/login")
-//                        .defaultSuccessUrl("/")
+
+                        .defaultSuccessUrl("/")
 //                        .userInfoEndpoint( config -> config
 //                                .userService()
-//                        )
+                        )
 //                )
                 .sessionManagement(config -> config
                         .maximumSessions(1)
@@ -121,6 +126,7 @@ public class SecurityConfig {
                         .authenticationEntryPoint(new AjaxLoginAuthenticationEntryPoint())
                         .accessDeniedHandler(ajaxAccessDeniedHandler())
                 )
+
                 .addFilterBefore(ajaxLoginProcessingFilter(http), UsernamePasswordAuthenticationFilter.class)
                 .csrf(config -> config.disable())
                 .cors(config -> config.configurationSource(source))

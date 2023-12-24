@@ -2,14 +2,16 @@ import React from "react";
 
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import LoginPage from "./componets/pages/Login";
-import Layout from "./componets/components/Layout";
-import GlobalStyles from "./componets/styles/GlobalStyles";
+import LoginPage from "./pages/Login";
+import Layout from "./components/Layout";
+import GlobalStyles from "./styles/GlobalStyles";
 
 import { ThemeProvider } from "styled-components";
-import theme from "./componets/styles/theme";
-import RegisterPage from "./componets/pages/Register";
-import MyPage from "./componets/pages/Mypage";
+import theme from "./styles/theme";
+import RegisterPage from "./pages/Register";
+import MyPage from "./pages/Mypage";
+import KakaoLoginHandler from "./handler/KakaoLoginHandler";
+import { KAKAO_REDIRECT_URI } from "./constants/login";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/mypage",
         element: <MyPage />,
+      },
+      {
+        path: "/login/oauth2/code/kakao",
+        element: <KakaoLoginHandler />
       }
     ],
   },
