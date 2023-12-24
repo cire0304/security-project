@@ -68,12 +68,6 @@ const LoginPage = () => {
         <Button
           onClick={() => {
             window.location.href = KAKAO_LOGIN_URL;
-
-            // axios.get('/oauth2/authorization/kakao',{
-            //   headers: {
-            //     "Content-Type": "application/json;charset=utf-8",
-            //     "Access-Control-Allow-Origin": "https://kauth.kakao.com/oauth/authorize" ,
-            // }});
           }}
         >
           카카오로 시작

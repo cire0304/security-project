@@ -37,20 +37,12 @@ public class FormUser implements ProviderUser {
         return password;
     }
 
-    @Override
-    public String getEmail() {
-        return email;
-    }
 
     @Override
     public String getProvider() {
         return provider;
     }
 
-    @Override
-    public String getPicture() {
-        return null;
-    }
 
     @Override
     public List<? extends GrantedAuthority> getAuthorities() {
@@ -67,13 +59,13 @@ public class FormUser implements ProviderUser {
 //        return null;
 //    }
 
-    @Override
-    public boolean isCertificated() {
-        return isCertificated;
-    }
+//    @Override
+//    public boolean isCertificated() {
+//        return isCertificated;
+//    }
 
-    @Override
-    public void isCertificated(boolean isCertificated) {
-        this.isCertificated = isCertificated;
-    }
+//    @Override
+//    public void isCertificated(boolean isCertificated) {
+//        this.isCertificated = isCertificated;
+//    }
 }

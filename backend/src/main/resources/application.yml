@@ -7,7 +7,8 @@ spring:
                     google:
                         client-id: 833958086342-8qnk6sqc3vqhkbmnsnjpv67qslcnv7a9.apps.googleusercontent.com
                         client-secret: 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
-                        scope: openid,profile,email
+#                        scope: openid,profile,email
+                        scope: profile,email
 
                     naver:
                         client-id: PyqTi2mMDkpj2i9Y22z4

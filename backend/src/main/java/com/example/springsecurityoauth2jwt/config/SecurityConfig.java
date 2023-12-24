@@ -5,6 +5,7 @@ import com.example.springsecurityoauth2jwt.security.filter.AjaxLoginProcessingFi
 import com.example.springsecurityoauth2jwt.security.handler.AjaxAccessDeniedHandler;
 import com.example.springsecurityoauth2jwt.security.handler.AjaxAuthenticationFailureHandler;
 import com.example.springsecurityoauth2jwt.security.handler.AjaxAuthenticationSuccessHandler;
+import com.example.springsecurityoauth2jwt.security.handler.OAuth2AuthenticationSuccessHandler;
 import com.example.springsecurityoauth2jwt.security.provider.AjaxAuthenticationProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
@@ -72,6 +73,11 @@ public class SecurityConfig {
     }
 
     @Bean
+    public AuthenticationSuccessHandler oauth2AuthenticationSuccessHandler() {
+        return new OAuth2AuthenticationSuccessHandler(delegatingSecurityContextRepository());
+    }
+
+    @Bean
     public AuthenticationFailureHandler authenticationFailureHandler() {
         return new AjaxAuthenticationFailureHandler();
     }
@@ -110,14 +116,8 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/")
                 )
                 .oauth2Login(config -> config
-
-//                        .loginPage("/login")
-
-                        .defaultSuccessUrl("/")
-//                        .userInfoEndpoint( config -> config
-//                                .userService()
-                        )
-//                )
+                        .successHandler(oauth2AuthenticationSuccessHandler())
+                )
                 .sessionManagement(config -> config
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(true)

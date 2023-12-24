@@ -30,8 +30,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         Account account = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("잘못된 사용자 입니다."));
 
-        List<? extends GrantedAuthority> authorities = account.getAuthorities();
-
         User user = User.builder()
                 .id(String.valueOf(account.getId()))
                 .username(account.getUsername())

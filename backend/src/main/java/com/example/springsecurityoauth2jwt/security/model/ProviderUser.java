@@ -12,12 +12,8 @@ public interface ProviderUser {
     String getId();
     String getUsername();
     String getPassword();
-    String getEmail();
     String getProvider();
-    String getPicture();
     List<? extends GrantedAuthority> getAuthorities();
     Map<String, Object> getAttributes();
-//    OAuth2User getOAuth2User();
-    boolean isCertificated();
-    void isCertificated(boolean isCertificated);
+
 }
