@@ -25,6 +25,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Header = styled.div`
+position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +34,6 @@ export const Header = styled.div`
   height: auto;
   padding: 10px 15px 10px 15px;
   border-bottom: 1px solid #eaebee;
-
 `;
 
 export const Title = styled.span`
@@ -43,6 +43,11 @@ export const Title = styled.span`
   line-height: 20px;
   font-weight: 500;
   padding: 10px;
+`;
+
+export const ButtonWrapper = styled.div`
+  position: absolute;
+  right: 10px;
 `;
 
 export const ChatWrapper = styled.div`

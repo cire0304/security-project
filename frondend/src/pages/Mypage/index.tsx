@@ -16,10 +16,8 @@ const MyPage = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       const res = await requestUserInfo();
-      console.log(res.data);
       setUserInfo({ username: res.data });
     };
-
     fetchUserInfo();
   }, []);
 

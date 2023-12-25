@@ -10,9 +10,8 @@ import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
 import RegisterPage from "./pages/Register";
 import MyPage from "./pages/Mypage";
-import KakaoLoginHandler from "./handler/KakaoLoginHandler";
-import { KAKAO_REDIRECT_URI } from "./constants/login";
 import ChatRoom from "./pages/chat-room";
+import Chat from "./test/chat";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/chatroom",
         element: <ChatRoom />,
+      },
+      {
+        path: "/test",
+        element: <Chat />,
       }
       
 
