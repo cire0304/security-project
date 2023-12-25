@@ -12,6 +12,7 @@ import RegisterPage from "./pages/Register";
 import MyPage from "./pages/Mypage";
 import KakaoLoginHandler from "./handler/KakaoLoginHandler";
 import { KAKAO_REDIRECT_URI } from "./constants/login";
+import ChatRoom from "./pages/chat-room";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         path: "/mypage",
         element: <MyPage />,
       },
+      {
+        path: "/chatroom",
+        element: <ChatRoom />,
+      }
       
 
     ],

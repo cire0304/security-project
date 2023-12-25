@@ -13,7 +13,7 @@ const UserInfo = () => {
         <S.Title>User Info</S.Title>
       </S.Header>
 
-      <S.ProfileImage src={profileImage} alt="asdfasd"/>
+      <S.ProfileImage src={profileImage} alt="profile"/>
       <S.Name>asdf</S.Name>
       <S.Email>asdf@example.com</S.Email>
 
