@@ -1,6 +1,6 @@
 package com.example.springsecurityoauth2jwt.security.filter;
 
-import com.example.springsecurityoauth2jwt.domain.dto.AccountDto;
+import com.example.springsecurityoauth2jwt.core.user.api.dto.AccountDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.ServletException;

@@ -1,5 +1,6 @@
-package com.example.springsecurityoauth2jwt.domain.entity;
+package com.example.springsecurityoauth2jwt.core.user.entity;
 
+import com.example.springsecurityoauth2jwt.security.domain.entity.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,7 +8,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 

@@ -1,5 +1,6 @@
-package com.example.springsecurityoauth2jwt.domain.entity;
+package com.example.springsecurityoauth2jwt.security.domain.entity;
 
+import com.example.springsecurityoauth2jwt.core.user.entity.Account;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,28 +1,20 @@
-package com.example.springsecurityoauth2jwt.controller;
+package com.example.springsecurityoauth2jwt.core.user.api;
 
-import com.example.springsecurityoauth2jwt.domain.dto.AccountDto;
-import com.example.springsecurityoauth2jwt.domain.entity.Account;
-import com.example.springsecurityoauth2jwt.domain.entity.Role;
-import com.example.springsecurityoauth2jwt.repository.RoleRepository;
-import com.example.springsecurityoauth2jwt.repository.UserRepository;
+import com.example.springsecurityoauth2jwt.core.user.api.dto.AccountDto;
+import com.example.springsecurityoauth2jwt.core.user.entity.Account;
+import com.example.springsecurityoauth2jwt.security.repository.RoleRepository;
+import com.example.springsecurityoauth2jwt.core.user.repository.UserRepository;
 import com.example.springsecurityoauth2jwt.security.model.PrincipalUser;
-import com.example.springsecurityoauth2jwt.service.UserService;
+import com.example.springsecurityoauth2jwt.core.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor

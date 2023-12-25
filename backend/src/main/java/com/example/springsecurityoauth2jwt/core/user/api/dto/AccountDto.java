@@ -1,4 +1,4 @@
-package com.example.springsecurityoauth2jwt.domain.dto;
+package com.example.springsecurityoauth2jwt.core.user.api.dto;
 
 import lombok.Data;
 

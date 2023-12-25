@@ -1,11 +1,10 @@
 package com.example.springsecurityoauth2jwt.security.service;
 
-import com.example.springsecurityoauth2jwt.domain.entity.Account;
-import com.example.springsecurityoauth2jwt.repository.UserRepository;
+import com.example.springsecurityoauth2jwt.core.user.entity.Account;
+import com.example.springsecurityoauth2jwt.core.user.repository.UserRepository;
 import com.example.springsecurityoauth2jwt.security.model.PrincipalUser;
 import com.example.springsecurityoauth2jwt.security.model.ProviderUser;
-import com.example.springsecurityoauth2jwt.security.model.User;
-import com.example.springsecurityoauth2jwt.service.UserService;
+import com.example.springsecurityoauth2jwt.core.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

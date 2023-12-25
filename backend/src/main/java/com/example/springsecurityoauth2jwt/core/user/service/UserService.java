@@ -1,9 +1,9 @@
-package com.example.springsecurityoauth2jwt.service;
+package com.example.springsecurityoauth2jwt.core.user.service;
 
-import com.example.springsecurityoauth2jwt.domain.entity.Account;
-import com.example.springsecurityoauth2jwt.domain.entity.Role;
-import com.example.springsecurityoauth2jwt.repository.RoleRepository;
-import com.example.springsecurityoauth2jwt.repository.UserRepository;
+import com.example.springsecurityoauth2jwt.core.user.entity.Account;
+import com.example.springsecurityoauth2jwt.security.domain.entity.Role;
+import com.example.springsecurityoauth2jwt.security.repository.RoleRepository;
+import com.example.springsecurityoauth2jwt.core.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
-package com.example.springsecurityoauth2jwt.repository;
+package com.example.springsecurityoauth2jwt.core.user.repository;
 
-import com.example.springsecurityoauth2jwt.domain.entity.Account;
+import com.example.springsecurityoauth2jwt.core.user.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
