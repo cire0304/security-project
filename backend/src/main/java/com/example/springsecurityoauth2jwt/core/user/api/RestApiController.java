@@ -22,7 +22,7 @@ public class RestApiController {
 
     private final UserService userService;
     private final UserRepository userRepository;
-    
+
     @GetMapping("/user")
     public String user(@AuthenticationPrincipal PrincipalUser principalUser) {
         String username = principalUser.getUsername();
