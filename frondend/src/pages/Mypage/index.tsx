@@ -4,13 +4,30 @@ import * as S from "./styles";
 import UserInfo from "./container/user-info";
 import TxInfo from "./container/transaction-info";
 import NavigationButton from "./components/navigation-box";
+import { requestUserInfo } from "../../api/users";
+
+export interface UserInfoProps {
+  username: string;
+}
 
 const MyPage = () => {
+  const [userInfo, setUserInfo] = useState<UserInfoProps>({ username: "" });
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const res = await requestUserInfo();
+      console.log(res.data);
+      setUserInfo({ username: res.data });
+    };
+
+    fetchUserInfo();
+  }, []);
+
   return (
     <S.Wrapper>
       <S.ContentWrapper>
-        <UserInfo/>
-        <TxInfo/>
+        <UserInfo {...userInfo} />
+        <TxInfo />
       </S.ContentWrapper>
 
       <S.NavigationWrapper>

@@ -6,9 +6,7 @@ import { BASE_URL } from '../constants/api';
 
 const instance = axios.create({
   baseURL: BASE_URL,
-  // httpsAgent: new https.Agent({  
-  //   rejectUnauthorized: false
-  // })
+  withCredentials: true
 });
 
 export default instance;

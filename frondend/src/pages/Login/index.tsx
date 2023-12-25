@@ -36,7 +36,9 @@ const LoginPage = () => {
       username: emailInputValue,
       password: passwordInputValue,
     };
-    await postLogin(data);
+    const res = await postLogin(data);
+    console.log(res);
+    
     navigate("/mypage");
   };
 

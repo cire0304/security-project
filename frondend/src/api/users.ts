@@ -2,7 +2,7 @@ import axios from "./axios";
 import Axios from 'axios';
 
 
-export const getMypage = async () => {
+export const requestUserInfo = async () => {
     try {
         const res = await axios.get(
             '/user', 

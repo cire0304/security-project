@@ -14,7 +14,7 @@ export const postLogin = async (loginData: data) => {
             {withCredentials: true}
         );
 
-        console.log("요청 성공");
+
         console.log(res.data);
         return res;
     } catch (err) {

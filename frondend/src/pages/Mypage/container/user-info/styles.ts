@@ -51,7 +51,7 @@ export const EditWrapper = styled.div`
 `;
 
 export const EditButton = styled.button`
-  padding: 10px;
+  padding: 10px 20px ;
   margin: 5px;
   border: none;
   border-radius: 5px;
